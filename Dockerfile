@@ -12,7 +12,7 @@ ADD servicescheck.sh /opt/servicescheck.sh
 
 ADD units/* /etc/systemd/system/
 
-RUN systemctl enable flannel.service kube-apiserver.service kube-controller-manager.service kube-scheduler.service &&\
+RUN chmod 666 /etc/systemd/system/* && systemctl enable flannel.service kube-apiserver.service kube-controller-manager.service kube-scheduler.service &&\
 systemctl start flannel kube-apiserver kube-controller-manager kube-scheduler
 
 EXPOSE 8080 
