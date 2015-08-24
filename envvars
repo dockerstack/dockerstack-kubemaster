@@ -1,0 +1,15 @@
+KUBE_APISERVER_OPTS="--bind-address=0.0.0.0 \
+ --address=0.0.0.0 \
+ --etcd_servers=http://$ETCD_SERVER \
+ --service-cluster-ip-range=10.200.0.0/8 \
+ --logtostderr=true \
+ --insecure-port=8080 \
+ --v=2"
+
+KUBE_CONTROLLER_MANAGER_OPTS="--logtostderr=true \
+  --master=http://127.0.0.1:8080 \
+  --v=2"
+
+KUBE_SCHEDULER_OPTS="--logtostderr=true \
+ --master=http://127.0.0.1:8080 \
+ --v=2"

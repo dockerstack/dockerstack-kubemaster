@@ -1,0 +1,4 @@
+#!/bin/bash
+
+source /opt/envvars
+exec /opt/hyperkube apiserver $KUBE_APISERVER_OPTS  2>&1  >>/var/log/kube-apiserver.log 

@@ -1,20 +1,15 @@
-FROM fedora:latest
+FROM ubuntu:14.04
 
-MAINTAINER K.G.R Vamsi
+MAINTAINER K.G.R Vamsi <kgrvamsi@yahoo.com>
 
-RUN  dnf update -y && dnf install wget tar gzip -y
+RUN apt-get update && \
+    apt-get -y install git curl build-essential runit && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
-ADD binary/* /usr/bin/ 
+ADD hyperkube /opt/
 
-ADD kubernetes.env /etc/kubernetes.env
+ADD envvars /opt/envvars
 
-ADD servicescheck.sh /opt/servicescheck.sh
+ADD apiserver/* /etc/service/apiserver/
 
-ADD units/* /etc/systemd/system/
-
-RUN chmod 666 /etc/systemd/system/kube-apiserver.service /etc/systemd/system/kube-controller-manager.service /etc/systemd/system/kube-scheduler.service && systemctl enable flannel.service kube-apiserver.service kube-controller-manager.service kube-scheduler.service &&\
-systemctl start flannel kube-apiserver kube-controller-manager kube-scheduler
-
-EXPOSE 8080 
-
-ENTRYPOINT ["/opt/servicescheck.sh"]
+ENTRYPOINT ["/usr/sbin/runsvdir-start","sv start apiserver","sv start controller-manager","sv start scheduler"]
