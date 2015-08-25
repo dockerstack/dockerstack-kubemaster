@@ -16,4 +16,6 @@ ADD controller-manager/* /etc/service/controller-manager/
 
 ADD scheduler/* /etc/service/scheduler/
 
-ENTRYPOINT ["/usr/sbin/runsvdir-start","sv start apiserver","sv start controller-manager","sv start scheduler"]
+ADD etcdserver.sh /opt/etcdserver.sh
+
+ENTRYPOINT ["/opt/etcdserver.sh"]
