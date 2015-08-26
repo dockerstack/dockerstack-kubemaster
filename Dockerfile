@@ -18,4 +18,8 @@ ADD scheduler/* /etc/service/scheduler/
 
 ADD etcdserver.sh /opt/etcdserver.sh
 
+RUN chmod 777 /opt/etcdserver.sh
+
+USER root
+
 ENTRYPOINT ["/opt/etcdserver.sh"]
