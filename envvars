@@ -1,8 +1,9 @@
 KUBE_APISERVER_OPTS="--bind-address=0.0.0.0 \
  --address=0.0.0.0 \
  --etcd_servers=http://$ETCD_SERVER \
- --service-cluster-ip-range=10.200.0.0/8 \
+ --service-cluster-ip-range=10.20.10.0/8 \
  --logtostderr=true \
+ --etcd-prefix=$ETCD_PREFIX \
  --insecure-port=8080 \
  --v=2"
 
